@@ -1,5 +1,7 @@
 package crazy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,5 +17,12 @@ public class ClientService implements IClientService {
 	public Client getClient(String email) {
 		return clientDao.getCliente(email);
 	}
+
+
+	@Override
+	public List<Client> getClientList() {		
+		return clientDao.getClientList();
+	}
+	
 
 }

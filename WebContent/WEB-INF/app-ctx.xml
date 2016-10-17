@@ -6,13 +6,15 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:property-placeholder location="classpath:jdbc.properties"/>
+
 	<bean class="com.zaxxer.hikari.HikariDataSource">
 		<property name="driverClassName" value="${driver}"/>
 		<property name="jdbcUrl" value="${url}"/>
 		<property name="username" value="${user}"/>
 		<property name="password" value="${pass}"/>		
 	</bean>
-		
+	
+	<!-- El view resol devuelve la vista, añadiendo una serie de parametros -->	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
