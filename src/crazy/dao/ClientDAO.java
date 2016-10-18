@@ -69,5 +69,24 @@ public class ClientDAO implements IClientDAO {
 		return listado;
 	}
 	
+	public boolean addClient(String nombre, String apellido, String email){
+		String consulta ="insert into cliente values( ? , ? , ? )";		
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement ps = con.prepareStatement(consulta);
+			ps.setString(1, nombre);
+			ps.setString(2, apellido);
+			ps.setString(3, email);
+			ps.executeUpdate();
+			ps.close();
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}		
+		
+	}
+	
 
 }

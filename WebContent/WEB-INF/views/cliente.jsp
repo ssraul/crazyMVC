@@ -7,14 +7,16 @@
 <title>Crazy Cliente</title>
 </head>
 <body>
+<h1>Cliente</h1>
+
+
+
+
+
 	<h1>${saludo}</h1>
 	<p><b>Nombre</b> ${cliente1.name}</p>
 	<p><b>Apellido</b> ${cliente1.surname}</p>
 	<p><b>Email</b> ${cliente1.email}</p>
-	<hr/>
-	<p><b>Nombre</b> ${cliente2.name}</p>
-	<p><b>Apellido</b> ${cliente2.surname}</p>
-	<p><b>Email</b> ${cliente2.email}</p>	
 	
 </body>
 </html>

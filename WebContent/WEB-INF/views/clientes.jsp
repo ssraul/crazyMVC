@@ -20,10 +20,11 @@
 
 <c:forEach var="cliente" items="${listadoClientes}" >
 <tr>
-	<td>${cliente.name}</td>
-	<td>${cliente.surname}</td>
-	<td>${cliente.email}</td>
 
+	<td><a href="client/${cliente.email}/">${cliente.name}</a></td><!-- paso como path variable -->
+	<td><a href="client?email=${cliente.email}">${cliente.surname}</a></td>
+	<td><a href="client?email=${cliente.email}">${cliente.email}</a></td>
+	
 </tr>
 </c:forEach>
 </table>
