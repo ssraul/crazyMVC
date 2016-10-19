@@ -35,6 +35,9 @@ public class ClientService implements IClientService {
 	public boolean deleteClient(String email) {
 		return clientDao.deleteClient(email);
 	}
+
+
+	
 	
 	
 	

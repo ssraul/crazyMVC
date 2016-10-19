@@ -88,6 +88,27 @@ public class ClientDAO implements IClientDAO {
 		
 	}
 	
+	public boolean addClient(Client cliente){
+		String consulta ="insert into cliente values( ? , ? , ? )";		
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement ps = con.prepareStatement(consulta);
+			ps.setString(1, cliente.getName());
+			ps.setString(2, cliente.getSurname());
+			ps.setString(3, cliente.getEmail());
+			ps.executeUpdate();
+			ps.close();
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}		
+		
+	}
+	
+	
+	
 	public boolean deleteClient(String email){
 		String consulta = "delete from cliente where email=?";
 
@@ -96,6 +117,7 @@ public class ClientDAO implements IClientDAO {
 			PreparedStatement query = con.prepareStatement(consulta);
 			query.setString(1, email);
 			query.executeUpdate(consulta);
+			
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

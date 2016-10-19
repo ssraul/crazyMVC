@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,6 +73,8 @@ public class ClientController {
 	
 	@RequestMapping(value = {"/nuevoCliente"}, method=RequestMethod.GET)//Para crear alta de clientes, solo devuelve una vista
 	public String addClient(Model model){
+		//te hace un cliente vacio para que no haya error
+		model.addAttribute("cliente", new Client());
 		return "clienteForm";
 	}
 	
@@ -123,14 +128,21 @@ public class ClientController {
 	
 	/**
 	 * Ejemplo 4 mejor manera de añadir cliente, los name del formulario tienen que tener
-	 * los mismos que la clase cliente name, surname, email.
+	 * los mismos que la clase cliente name, surname, email. solo con el @ModelAttribute
 	 * @param model
 	 * @param cliente
 	 * @return
 	 */	
 	@RequestMapping(value = {"/saveclient"}, method=RequestMethod.POST)
-	public String salvarCliente(Model model, @ModelAttribute Client cliente){
-		String insercion = "Cliente insertado correctamente";
+	public String salvarCliente(Model model, @Valid @ModelAttribute(name="cliente") Client cliente,
+			BindingResult result){
+		
+		//si hay errores en el formulario, lo redirigimos la formulario otra vez
+		if(result.hasErrors()){
+			return "clienteForm";
+		}
+		
+				
 		
 		//1.obtener los datos
 		String nombre = cliente.getName();
@@ -143,15 +155,22 @@ public class ClientController {
 		
 		//2.hacemos las validaciones
 		
-		
+
 		
 		
 		//3.hacemos la inserción en la base de datos
 		if(!clientService.addClient(nombre, apellido, email)){
-			insercion = "Error al grabar datos";
+			
 		}
+		
 		return obtenerListaClientes(model);
 		//return "clienteForm";
+		//return "redirect:lista";
+	}
+	
+	@ModelAttribute
+	public void ejemplo(Model model){
+		model.addAttribute("mensaje","crazy aplication");
 	}
 	
 	
