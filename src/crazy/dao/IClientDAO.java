@@ -7,6 +7,8 @@ import crazy.model.Client;
 public interface IClientDAO {
 	
 	public Client getCliente(String email);	
-	public List<Client> getClientList(); 
+	public List<Client> getClientList();
+	public boolean addClient(String nombre, String apellido, String email); 
+	public boolean deleteClient(String email);
 	
 }

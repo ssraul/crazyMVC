@@ -23,7 +23,19 @@ public class ClientService implements IClientService {
 	public List<Client> getClientList() {		
 		return clientDao.getClientList();
 	}
-	
 
+
+	@Override
+	public boolean addClient(String nombre, String apellido, String email) {		
+		return clientDao.addClient(nombre, apellido, email);
+	}
+
+
+	@Override
+	public boolean deleteClient(String email) {
+		return clientDao.deleteClient(email);
+	}
+	
+	
 	
 }

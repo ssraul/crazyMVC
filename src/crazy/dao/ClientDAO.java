@@ -88,5 +88,22 @@ public class ClientDAO implements IClientDAO {
 		
 	}
 	
+	public boolean deleteClient(String email){
+		String consulta = "delete from cliente where email=?";
+
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement query = con.prepareStatement(consulta);
+			query.setString(1, email);
+			query.executeUpdate(consulta);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		
+	}
+	
 
 }

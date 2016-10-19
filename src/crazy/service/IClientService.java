@@ -9,5 +9,7 @@ public interface IClientService {
 	
 	Client getClient(String email);	
 	List<Client> getClientList();
+	public boolean addClient(String nombre, String apellido, String email); 
+	public boolean deleteClient(String email);
 	
 }

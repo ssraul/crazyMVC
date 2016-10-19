@@ -11,11 +11,15 @@
 <h1>Listado de clientes</h1>
 
 
+<a href="nuevoCliente"><input type="button" value="Nuevo+"/></a>
+
+
 <table>
 <tr>
 <th>Nombre: </th>
 <th>Apellido: </th>
 <th>Email: </th>
+<th>Eliminar</th>
 </tr>
 
 <c:forEach var="cliente" items="${listadoClientes}" >
@@ -24,6 +28,8 @@
 	<td><a href="client/${cliente.email}/">${cliente.name}</a></td><!-- paso como path variable -->
 	<td><a href="client?email=${cliente.email}">${cliente.surname}</a></td>
 	<td><a href="client?email=${cliente.email}">${cliente.email}</a></td>
+	<td><a href="borrarcliente?email=${cliente.email}">X</a></td>
+	
 	
 </tr>
 </c:forEach>
