@@ -5,20 +5,22 @@ import org.hibernate.validator.constraints.*;
 
 //Utilizamos la interfaz validator de java para hacer validaciones
 //tenemos dos libreria que tenemos que importar hibernate validator engine y javax,validation
+//las validaciones se hacen en el interior de cada modelo
+//DTO data transfer object, para pasar datos con diferentes modelos juntos
 
 
 public class Client {
 	
-	@NotNull(message = "Este campo no puede ser nulo")
+	@NotNull(message = "Nombre no puede ser nulo")
 	@Size(min=3, max=30, message ="Nombre no cumple condiciones")
 	String name;
 	
 	
-	@NotNull(message = "Este campo no puede ser nulo")
-	@Size(min=3, max=30, message ="Nombre no cumple condiciones")
+	@NotNull(message = "apellido no puede ser nulo")
+	@Size(min=3, max=30, message ="apellido no cumple condiciones")
 	String surname;
 	
-	
+	@NotNull(message = "El email es obligatorio.")
 	@Email(message="Error email")
 	String email;
 	

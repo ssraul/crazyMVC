@@ -137,10 +137,13 @@ public class ClientController {
 	public String salvarCliente(Model model, @Valid @ModelAttribute(name="cliente") Client cliente,
 			BindingResult result){
 		
+		
+		
 		//@valid es el de las validaciones
 		
 		//@ModelAttribute, consigue los datos de la clase entera, siempre que coincidan los nombre y la 
 		//conversion de datos tambien me la hace spring.
+		
 		
 		//si hay errores en el formulario, lo redirigimos la formulario otra vez
 		if(result.hasErrors()){
@@ -158,6 +161,10 @@ public class ClientController {
 		//return "redirect:lista";
 	}
 	
+	/**
+	 * Modelo compartido por todas las peticiones
+	 * @param model
+	 */
 	@ModelAttribute
 	public void ejemplo(Model model){
 		model.addAttribute("mensaje","crazy aplication");
