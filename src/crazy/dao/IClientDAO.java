@@ -10,6 +10,6 @@ public interface IClientDAO {
 	public List<Client> getClientList();
 	public boolean addClient(String nombre, String apellido, String email); 
 	public boolean deleteClient(String email);
-	public boolean addClient(Client cliente);
+	public boolean addClientFull(Client cliente);
 	
 }

@@ -37,6 +37,12 @@ public class ClientService implements IClientService {
 	}
 
 
+	@Override
+	public boolean addClientFull(Client cliente) {	
+		return  clientDao.addClientFull(cliente);
+	}
+
+
 	
 	
 	

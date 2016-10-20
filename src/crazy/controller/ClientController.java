@@ -137,32 +137,22 @@ public class ClientController {
 	public String salvarCliente(Model model, @Valid @ModelAttribute(name="cliente") Client cliente,
 			BindingResult result){
 		
+		//@valid es el de las validaciones
+		
+		//@ModelAttribute, consigue los datos de la clase entera, siempre que coincidan los nombre y la 
+		//conversion de datos tambien me la hace spring.
+		
 		//si hay errores en el formulario, lo redirigimos la formulario otra vez
 		if(result.hasErrors()){
 			return "clienteForm";
 		}
 		
 				
-		
-		//1.obtener los datos
-		String nombre = cliente.getName();
-		String apellido = cliente.getSurname();
-		String email = cliente.getEmail();
-		
-		model.addAttribute("nombre", nombre);
-		model.addAttribute("apellido",apellido);
-		model.addAttribute("email",email);
-		
-		//2.hacemos las validaciones
-		
-
-		
-		
-		//3.hacemos la inserción en la base de datos
-		if(!clientService.addClient(nombre, apellido, email)){
-			
+		if(clientService.addClientFull(cliente)){
+			return obtenerListaClientes(model);
 		}
 		
+		//podemos hacer diferentes salidas de datos.
 		return obtenerListaClientes(model);
 		//return "clienteForm";
 		//return "redirect:lista";

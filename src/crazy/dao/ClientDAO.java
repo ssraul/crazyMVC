@@ -88,7 +88,7 @@ public class ClientDAO implements IClientDAO {
 		
 	}
 	
-	public boolean addClient(Client cliente){
+	public boolean addClientFull(Client cliente){
 		String consulta ="insert into cliente values( ? , ? , ? )";		
 		try {
 			Connection con = ds.getConnection();

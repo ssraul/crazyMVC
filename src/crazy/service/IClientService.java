@@ -11,5 +11,5 @@ public interface IClientService {
 	List<Client> getClientList();
 	public boolean addClient(String nombre, String apellido, String email); 
 	public boolean deleteClient(String email);
-	
+	public boolean addClientFull(Client cliente);
 }
