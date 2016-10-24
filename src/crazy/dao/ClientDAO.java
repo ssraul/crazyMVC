@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,13 +111,14 @@ public class ClientDAO implements IClientDAO {
 	
 	
 	public boolean deleteClient(String email){
-		String consulta = "delete from cliente where email=?";
+		String consulta = "delete from cliente where email='"+email+"'";
 
 		try {
 			Connection con = ds.getConnection();
-			PreparedStatement query = con.prepareStatement(consulta);
-			query.setString(1, email);
-			query.executeUpdate(consulta);
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(consulta);
+			stmt.close();
+			con.close();
 			
 			return true;
 		} catch (SQLException e) {

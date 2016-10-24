@@ -20,7 +20,7 @@ import crazy.model.Client;
 import crazy.service.IClientService;
 
 @Controller
-@RequestMapping(value = "/")//es un primer filtro
+@RequestMapping(value = "/client")//es un primer filtro
 public class ClientController {
 	@Autowired
 	IClientService clientService;
@@ -74,15 +74,19 @@ public class ClientController {
 	@RequestMapping(value = {"/nuevoCliente"}, method=RequestMethod.GET)//Para crear alta de clientes, solo devuelve una vista
 	public String addClient(Model model){
 		//te hace un cliente vacio para que no haya error
-		model.addAttribute("cliente", new Client());
+		//model.addAttribute("cliente", new Client());
+		model.addAttribute("totalErrores", 0);
+		model.addAttribute("listaErrores", null);	
+	
+		
 		return "clienteForm";
 	}
 	
 	@RequestMapping(value = {"/borrarcliente"}, method=RequestMethod.GET)//Para crear alta de clientes, solo devuelve una vista
-	public String deleteClient(Model model, @RequestParam() String email){
+	public String deleteClient(Model model, @RequestParam(name="email") String email){
 		String borrado = "OK";
 		clientService.deleteClient(email);	
-		model.addAttribute("validacion", borrado);
+		model.addAttribute("validacion", email);
 		
 		return "clienteForm";
 	}
@@ -134,22 +138,36 @@ public class ClientController {
 	 * @return
 	 */	
 	@RequestMapping(value = {"/saveclient"}, method=RequestMethod.POST)
-	public String salvarCliente(Model model, @Valid @ModelAttribute(name="cliente") Client cliente,
+	public String salvarCliente(Model model,@Valid @ModelAttribute(name="cliente") Client cliente,
 			BindingResult result){
 		
+		//BindingResult result es el resultado de la validacion de Spring
 		
-		
-		//@valid es el de las validaciones
+		//@valid es el de las validaciones, es el equivalente a hacer la llamada validator, en la validacion manual
 		
 		//@ModelAttribute, consigue los datos de la clase entera, siempre que coincidan los nombre y la 
 		//conversion de datos tambien me la hace spring.
 		
 		
 		//si hay errores en el formulario, lo redirigimos la formulario otra vez
+		//si hay errores guarda el total de errores y los manda otra vez al formulario
 		if(result.hasErrors()){
+			
+			//todos los errores
+			//model.addAttribute("errores",result);//podraimos tener solo este para tener errores
+			
+			model.addAttribute("totalErrores", result.getErrorCount());
+			model.addAttribute("listaErrores", result.getAllErrors());
+			
+			
+			model.addAttribute("nombre",cliente.getName());
+			model.addAttribute("apellido",cliente.getSurname());
+			model.addAttribute("email",cliente.getEmail());
+			//model.addAttribute("pruebas",result.getFieldErrorCount("name"));
+			
 			return "clienteForm";
 		}
-		
+
 				
 		if(clientService.addClientFull(cliente)){
 			return obtenerListaClientes(model);

@@ -11,17 +11,19 @@ import org.hibernate.validator.constraints.*;
 
 public class Client {
 	
-	@NotNull(message = "Nombre no puede ser nulo")
-	@Size(min=3, max=30, message ="Nombre no cumple condiciones")
+	@Pattern(regexp = "^[A-Za-z]{3,30}$", message ="Nombre tiene que ser en 3 y 30 caracteres")
+	//@NotNull(message = "Nombre no puede ser nulo")
+	//@Size(min=3, max=30, message ="Nombre tiene que ser mayor de 3 y menor de 30")
 	String name;
 	
-	
-	@NotNull(message = "apellido no puede ser nulo")
-	@Size(min=3, max=30, message ="apellido no cumple condiciones")
+	@Pattern(regexp = "^[A-Za-z]{3,30}$", message ="Apellido tiene que ser en 3 y 30 caracteres")
+	//@NotNull(message = "apellido no puede ser nulo")
+	//@Size(min=3, max=30, message ="apellido tiene que ser mayor de 3 y menor de 30")
 	String surname;
 	
-	@NotNull(message = "El email es obligatorio.")
-	@Email(message="Error email")
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message ="Email no valido")
+	//@NotNull(message = "El email no puede ser nulo")
+	//@Email(message="Error sintasis de email")
 	String email;
 	
 	
