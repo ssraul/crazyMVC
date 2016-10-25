@@ -6,6 +6,6 @@ import crazy.model.Order;
 
 public interface IOrderService {
 	
-	List<Order> getOrderList(String Email);
+	public List<Order> listOrders(String email);
 
 }

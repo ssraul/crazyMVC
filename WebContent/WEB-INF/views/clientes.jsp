@@ -20,6 +20,8 @@
 <th>Apellido: </th>
 <th>Email: </th>
 <th>Eliminar</th>
+<th>Pedidos</th>
+
 </tr>
 
 <c:forEach var="cliente" items="${listadoClientes}" >
@@ -29,7 +31,7 @@
 	<td><a href="client?email=${cliente.email}">${cliente.surname}</a></td>
 	<td><a href="client?email=${cliente.email}">${cliente.email}</a></td>
 	<td><a href="borrarcliente?email=${cliente.email}">X</a></td>
-	
+	<td><a href="../order/listorders?email=${cliente.email}">Ver</a></td>
 	
 </tr>
 </c:forEach>

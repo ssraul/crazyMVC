@@ -7,6 +7,7 @@ public class Order {
 	String name;
 	String email;
 	LocalDateTime fecha;
+	
 	public Long getId() {
 		return id;
 	}
@@ -31,6 +32,8 @@ public class Order {
 	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
+	
+	
 	
 	
 

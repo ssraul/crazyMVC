@@ -6,6 +6,9 @@ import crazy.model.Order;
 
 public interface IOrderDAO {
 	
-	List<Order> getOrderList(String Email);
+	
+	public List<Order> listOrders(String email);
+	
+	
 
 }
