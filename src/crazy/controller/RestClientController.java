@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ import crazy.service.IClientService;
 import crazy.service.IOrderService;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
-@RestController
+
+@RestController//¡¡Importante poner los datos de RestController
 @RequestMapping(value="/cliente")
 public class RestClientController {
 	
@@ -64,15 +66,29 @@ public class RestClientController {
 		return nuevo;
 	}
 	
+	@RequestMapping(value = "/listapedidos", method=RequestMethod.GET)//es un segundo filtro
+	public List<Order> obtenerListadoPedidosCliente(@RequestParam String email) {
+		
+		Client c = clientService.getClient(email);			
+		List<Order>listaPedidos = new ArrayList<Order>();
+		listaPedidos = orderService.listOrders(email);
+			  
+		return listaPedidos;
+	}
+	
+	
 	
 	@GetMapping(value = {"/clienthat/{email}/"})
 	public ClientWrapper obtenerClienteHat(@PathVariable String email){
 		Client c = clientService.getClient(email);
 		ClientWrapper cw = new ClientWrapper(c);
 		Link selfLink = linkTo(RestClientController.class).slash(email).withSelfRel();
+		Link lnkClientes = linkTo(methodOn(RestClientController.class).obtenerListaCliente()).withRel("Lista_Clientes");
+		Link lnkPedidos = linkTo(methodOn(RestClientController.class).obtenerListadoPedidosCliente(email)).withRel("Listado_pedidos");
 		cw.add(selfLink);		
-		return cw;
-
+		cw.add(lnkClientes);
+		cw.add(lnkPedidos);
+		return cw;		
 	}
 	
 	

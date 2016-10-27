@@ -21,6 +21,9 @@
 			<bean
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 			</bean>
+<!-- 						<bean
+				class="org.springframework.http.converter.xml.">
+			</bean> -->
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
