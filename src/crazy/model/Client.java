@@ -1,13 +1,15 @@
 package crazy.model;
 
 import javax.validation.constraints.*;
+
 import org.hibernate.validator.constraints.*;
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 //Utilizamos la interfaz validator de java para hacer validaciones
 //tenemos dos libreria que tenemos que importar hibernate validator engine y javax,validation
 //las validaciones se hacen en el interior de cada modelo
 //DTO data transfer object, para pasar datos con diferentes modelos juntos
-
 
 public class Client {
 	
@@ -21,6 +23,7 @@ public class Client {
 	//@Size(min=3, max=30, message ="apellido tiene que ser mayor de 3 y menor de 30")
 	String surname;
 	
+	@JacksonXmlProperty(localName="Direccion_de_Correo")
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message ="Email no valido")
 	//@NotNull(message = "El email no puede ser nulo")
 	//@Email(message="Error sintasis de email")

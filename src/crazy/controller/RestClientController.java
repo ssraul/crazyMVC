@@ -77,9 +77,24 @@ public class RestClientController {
 	}
 	
 	
+	//devuelve los datos en Json
+	@GetMapping(value = {"/clienthat/{email}/json"}, produces="application/json;charset=UTF-8")
+	public ClientWrapper obtenerClienteHatJson(@PathVariable String email){
+		Client c = clientService.getClient(email);
+		ClientWrapper cw = new ClientWrapper(c);
+		Link selfLink = linkTo(RestClientController.class).slash(email).withSelfRel();
+		Link lnkClientes = linkTo(methodOn(RestClientController.class).obtenerListaCliente()).withRel("Lista_Clientes");
+		Link lnkPedidos = linkTo(methodOn(RestClientController.class).obtenerListadoPedidosCliente(email)).withRel("Listado_pedidos");
+		cw.add(selfLink);		
+		cw.add(lnkClientes);
+		cw.add(lnkPedidos);
+		return cw;		
+	}
 	
-	@GetMapping(value = {"/clienthat/{email}/"})
-	public ClientWrapper obtenerClienteHat(@PathVariable String email){
+	
+	//devuelve los datos en xml
+	@GetMapping(value = {"/clienthat/{email}/xml"}, produces="application/xml;charset=UTF-8")
+	public ClientWrapper obtenerClienteHatXml(@PathVariable String email){
 		Client c = clientService.getClient(email);
 		ClientWrapper cw = new ClientWrapper(c);
 		Link selfLink = linkTo(RestClientController.class).slash(email).withSelfRel();

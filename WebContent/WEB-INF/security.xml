@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+
+	
+	
+		<!-- Establecemos la seguridad -->
+	<security:http auto-config="true" use-expressions="true">
+	<security:intercept-url pattern="/client/lista" access="isAuthenticated()"/><!-- solo los usuarios autentificados -->
+		<security:intercept-url pattern="/rest/cliente/clienthat/raul@gmail.com/json" access="permitAll"/><!-- permitido a todo el mundo -->
+		<security:intercept-url pattern="/rest/cliente/clienthat/raul@gmail.com/xml"
+			access="hasRole('rol_admin')" /><!--Solo los usuarios que se han administradores de rol ,access="permitAll permitido a todos -->
+		<security:http-basic />
+	</security:http>
+
+
+	<!-- Definimos los usuarios que tiene accesos--> 
+	<security:user-service>
+		<!-- Cada uno define sus roles en authorities-->
+		<security:user name="raul" password="1234" authorities="rol_admin" />
+		<security:user name="eva" password="1234" authorities="rol_user" />
+		<security:user name="hector" password="1234"
+			authorities="rol_user, rol_admin" />
+	</security:user-service>
+	
+<!-- 	
+	<security:jdbc-user-service data-source-ref="as"
+	users-by-username-query="select username, password from usuarios where username=?"
+	authorities-by-username-query="select username, rol from roles where username=?"
+	/>
+-->
+
+</beans>
