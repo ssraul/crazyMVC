@@ -16,20 +16,21 @@
 	</security:http>
 
 
-	<!-- Definimos los usuarios que tiene accesos--> 
+	
 	<security:user-service>
-		<!-- Cada uno define sus roles en authorities-->
+		
 		<security:user name="raul" password="1234" authorities="rol_admin" />
 		<security:user name="eva" password="1234" authorities="rol_user" />
 		<security:user name="hector" password="1234"
 			authorities="rol_user, rol_admin" />
 	</security:user-service>
 	
-<!-- 	
-	<security:jdbc-user-service data-source-ref="as"
-	users-by-username-query="select username, password from usuarios where username=?"
-	authorities-by-username-query="select username, rol from roles where username=?"
-	/>
--->
+	
+	<!--
+	<security:jdbc-user-service data-source-ref="da"
+	users-by-username-query="select username, password, 1 from usuarios where username=?"
+	authorities-by-username-query="select username, rol from roles where username=?"/>
+	-->
+
 
 </beans>

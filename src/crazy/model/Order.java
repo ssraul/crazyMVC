@@ -2,11 +2,31 @@ package crazy.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="pedidos")
 public class Order {
+	
+	@Id
 	Long id;
+	
+	@Column(name="nombre")
 	String name;
+		
 	String email;
+	
 	LocalDateTime fecha;
+	
+	
+	
+	public Order(){
+		
+	}
 	
 	public Long getId() {
 		return id;

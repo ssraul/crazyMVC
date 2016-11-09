@@ -18,6 +18,7 @@ import crazy.model.Client;
 import crazy.model.ClientWrapper;
 import crazy.model.Order;
 import crazy.model.clientePedidos;
+import crazy.repository.ClientRepository;
 import crazy.service.IClientService;
 import crazy.service.IOrderService;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
@@ -29,6 +30,9 @@ public class RestClientController {
 	
 	@Autowired
 	IClientService clientService;
+	
+	@Autowired
+	ClientRepository clientRp;
 	
 	@Autowired
 	IOrderService orderService;
@@ -105,6 +109,16 @@ public class RestClientController {
 		cw.add(lnkPedidos);
 		return cw;		
 	}
+	
+	@RequestMapping(value = "/clientjpa/{email}/", method=RequestMethod.GET)
+	public Client obtenerClienteJpa(@PathVariable String email){
+		return clientRp.findOne(email);
+		
+	}
+	
+	
+	
+	
 	
 	
 
